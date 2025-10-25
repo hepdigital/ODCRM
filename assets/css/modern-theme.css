@@ -137,6 +137,7 @@ body {
 
 .sidebar-nav {
   padding: var(--spacing-lg) 0;
+  padding-bottom: 80px; /* Footer için alan bırak */
 }
 
 .nav-section {
@@ -193,6 +194,47 @@ body {
   padding: 0.25rem 0.5rem;
   border-radius: 9999px;
   margin-left: auto;
+}
+
+/* Sidebar Footer - Theme Toggle */
+.sidebar-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--spacing-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+}
+
+.sidebar-theme-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: var(--radius-md);
+  color: var(--text-white);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.sidebar-theme-toggle:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateY(-2px);
+}
+
+.sidebar-theme-toggle i {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+}
+
+.sidebar-theme-toggle span {
+  font-weight: 500;
 }
 
 /* Main Content */

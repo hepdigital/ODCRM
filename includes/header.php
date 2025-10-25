@@ -104,6 +104,14 @@ if (!isset($_SESSION['user_id']) && basename($_SERVER['PHP_SELF']) !== 'login.ph
                     </div>
                 </div>
             </nav>
+
+            <!-- Theme Toggle -->
+            <div class="sidebar-footer">
+                <button class="sidebar-theme-toggle" id="sidebarThemeToggle" title="Tema Değiştir">
+                    <i class="fas fa-moon"></i>
+                    <span>Koyu Tema</span>
+                </button>
+            </div>
         </aside>
         
         <!-- Main Content -->

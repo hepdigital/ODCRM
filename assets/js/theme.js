@@ -17,30 +17,28 @@ class ThemeManager {
     }
 
     createThemeToggle() {
-        // Check if toggle already exists
-        if (document.querySelector('.theme-toggle')) return;
+        // Sidebar theme toggle'ı güncelle
+        const sidebarToggle = document.getElementById('sidebarThemeToggle');
+        if (sidebarToggle) {
+            const icon = sidebarToggle.querySelector('i');
+            const text = sidebarToggle.querySelector('span');
 
-        const headerRight = document.querySelector('.header-right');
-        if (!headerRight) return;
-
-        const themeToggle = document.createElement('button');
-        themeToggle.className = 'theme-toggle';
-        themeToggle.innerHTML = this.theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        themeToggle.title = this.theme === 'dark' ? 'Gündüz Moduna Geç' : 'Gece Moduna Geç';
-        
-        // Insert before user menu
-        const userMenu = headerRight.querySelector('.user-menu');
-        if (userMenu) {
-            headerRight.insertBefore(themeToggle, userMenu);
-        } else {
-            headerRight.appendChild(themeToggle);
+            if (this.theme === 'dark') {
+                icon.className = 'fas fa-sun';
+                text.textContent = 'Açık Tema';
+                sidebarToggle.title = 'Gündüz Moduna Geç';
+            } else {
+                icon.className = 'fas fa-moon';
+                text.textContent = 'Koyu Tema';
+                sidebarToggle.title = 'Gece Moduna Geç';
+            }
         }
     }
 
     bindEvents() {
-        const themeToggle = document.querySelector('.theme-toggle');
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => this.toggleTheme());
+        const sidebarToggle = document.getElementById('sidebarThemeToggle');
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', () => this.toggleTheme());
         }
 
         // Listen for system theme changes
@@ -64,10 +62,20 @@ class ThemeManager {
     }
 
     updateToggleIcon() {
-        const themeToggle = document.querySelector('.theme-toggle');
-        if (themeToggle) {
-            themeToggle.innerHTML = this.theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-            themeToggle.title = this.theme === 'dark' ? 'Gündüz Moduna Geç' : 'Gece Moduna Geç';
+        const sidebarToggle = document.getElementById('sidebarThemeToggle');
+        if (sidebarToggle) {
+            const icon = sidebarToggle.querySelector('i');
+            const text = sidebarToggle.querySelector('span');
+
+            if (this.theme === 'dark') {
+                icon.className = 'fas fa-sun';
+                text.textContent = 'Açık Tema';
+                sidebarToggle.title = 'Gündüz Moduna Geç';
+            } else {
+                icon.className = 'fas fa-moon';
+                text.textContent = 'Koyu Tema';
+                sidebarToggle.title = 'Gece Moduna Geç';
+            }
         }
     }
 
