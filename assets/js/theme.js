@@ -6,12 +6,22 @@ class ThemeManager {
     }
 
     init() {
+        console.log('ThemeManager initialized with theme:', this.theme); // Debug
         this.applyTheme();
-        this.createThemeToggle();
-        this.bindEvents();
+        // createThemeToggle'ı DOMContentLoaded sonrası çağır
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.createThemeToggle();
+                this.bindEvents();
+            });
+        } else {
+            this.createThemeToggle();
+            this.bindEvents();
+        }
     }
 
     applyTheme() {
+        console.log('Applying theme:', this.theme); // Debug
         document.documentElement.setAttribute('data-theme', this.theme);
         localStorage.setItem('theme', this.theme);
     }
@@ -19,6 +29,7 @@ class ThemeManager {
     createThemeToggle() {
         // Sidebar theme toggle'ı güncelle
         const sidebarToggle = document.getElementById('sidebarThemeToggle');
+        console.log('Sidebar toggle element:', sidebarToggle); // Debug
         if (sidebarToggle) {
             const icon = sidebarToggle.querySelector('i');
             const text = sidebarToggle.querySelector('span');
@@ -37,8 +48,12 @@ class ThemeManager {
 
     bindEvents() {
         const sidebarToggle = document.getElementById('sidebarThemeToggle');
+        console.log('Binding events to sidebar toggle:', sidebarToggle); // Debug
         if (sidebarToggle) {
-            sidebarToggle.addEventListener('click', () => this.toggleTheme());
+            sidebarToggle.addEventListener('click', () => {
+                console.log('Sidebar toggle clicked!'); // Debug
+                this.toggleTheme();
+            });
         }
 
         // Listen for system theme changes
@@ -55,7 +70,9 @@ class ThemeManager {
     }
 
     toggleTheme() {
+        console.log('Toggling theme from', this.theme); // Debug
         this.theme = this.theme === 'light' ? 'dark' : 'light';
+        console.log('New theme:', this.theme); // Debug
         this.applyTheme();
         this.updateToggleIcon();
         this.showThemeNotification();

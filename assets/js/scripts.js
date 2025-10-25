@@ -223,21 +223,27 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 5000);
     });
-    
-    // Bildirim dropdown
+
+    // Dropdown menüleri - Değişkenleri önce tanımla
     const notificationIcon = document.getElementById('notificationIcon');
     const notificationDropdown = document.getElementById('notificationDropdown');
+    const userAvatar = document.getElementById('userAvatar');
+    const userDropdown = document.getElementById('userDropdown');
 
+    // Bildirim dropdown
     if (notificationIcon && notificationDropdown) {
+        console.log('Notification dropdown initialized'); // Debug için
         // Icon'a tıklayınca aç/kapat
         notificationIcon.addEventListener('click', function(e) {
             e.stopPropagation();
+            console.log('Notification icon clicked'); // Debug için
             // Kullanıcı dropdown'unu kapat
             if (userDropdown) {
                 userDropdown.classList.remove('show');
             }
             // Bildirim dropdown'unu toggle et
             notificationDropdown.classList.toggle('show');
+            console.log('Notification dropdown classes:', notificationDropdown.className); // Debug için
         });
 
         // Dropdown içine tıklayınca kapanmasın
@@ -247,19 +253,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Kullanıcı dropdown
-    const userAvatar = document.getElementById('userAvatar');
-    const userDropdown = document.getElementById('userDropdown');
-
     if (userAvatar && userDropdown) {
+        console.log('User dropdown initialized'); // Debug için
         // Avatar'a tıklayınca aç/kapat
         userAvatar.addEventListener('click', function(e) {
             e.stopPropagation();
+            console.log('User avatar clicked'); // Debug için
             // Bildirim dropdown'unu kapat
             if (notificationDropdown) {
                 notificationDropdown.classList.remove('show');
             }
             // Kullanıcı dropdown'unu toggle et
             userDropdown.classList.toggle('show');
+            console.log('User dropdown classes:', userDropdown.className); // Debug için
         });
 
         // Dropdown içine tıklayınca kapanmasın

@@ -207,6 +207,11 @@ body {
   background: var(--bg-sidebar);
 }
 
+/* Light theme'de sidebar-footer border */
+[data-theme="light"] .sidebar-footer {
+  border-top: 1px solid rgba(30, 41, 59, 0.1);
+}
+
 .sidebar-theme-toggle {
   width: 100%;
   display: flex;
@@ -230,11 +235,16 @@ body {
 
 .sidebar-theme-toggle i {
   font-size: 1.1rem;
-  color: var(--primary-color);
+  color: #a5b4fc;
+}
+
+.sidebar-theme-toggle:hover i {
+  color: #818cf8;
 }
 
 .sidebar-theme-toggle span {
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 /* Main Content */
