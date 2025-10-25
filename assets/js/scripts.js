@@ -227,46 +227,54 @@ document.addEventListener('DOMContentLoaded', function() {
     // Bildirim dropdown
     const notificationIcon = document.getElementById('notificationIcon');
     const notificationDropdown = document.getElementById('notificationDropdown');
-    
+
     if (notificationIcon && notificationDropdown) {
         // Icon'a tıklayınca aç/kapat
         notificationIcon.addEventListener('click', function(e) {
             e.stopPropagation();
-            notificationDropdown.style.display = 
-                notificationDropdown.style.display === 'block' ? 'none' : 'block';
+            // Kullanıcı dropdown'unu kapat
+            if (userDropdown) {
+                userDropdown.classList.remove('show');
+            }
+            // Bildirim dropdown'unu toggle et
+            notificationDropdown.classList.toggle('show');
         });
-        
+
         // Dropdown içine tıklayınca kapanmasın
         notificationDropdown.addEventListener('click', function(e) {
             e.stopPropagation();
         });
     }
-    
+
     // Kullanıcı dropdown
     const userAvatar = document.getElementById('userAvatar');
     const userDropdown = document.getElementById('userDropdown');
-    
+
     if (userAvatar && userDropdown) {
         // Avatar'a tıklayınca aç/kapat
         userAvatar.addEventListener('click', function(e) {
             e.stopPropagation();
-            userDropdown.style.display = 
-                userDropdown.style.display === 'block' ? 'none' : 'block';
+            // Bildirim dropdown'unu kapat
+            if (notificationDropdown) {
+                notificationDropdown.classList.remove('show');
+            }
+            // Kullanıcı dropdown'unu toggle et
+            userDropdown.classList.toggle('show');
         });
-        
+
         // Dropdown içine tıklayınca kapanmasın
         userDropdown.addEventListener('click', function(e) {
             e.stopPropagation();
         });
     }
-    
+
     // Dışarı tıklayınca her ikisini de kapat
     document.addEventListener('click', function() {
         if (notificationDropdown) {
-            notificationDropdown.style.display = 'none';
+            notificationDropdown.classList.remove('show');
         }
         if (userDropdown) {
-            userDropdown.style.display = 'none';
+            userDropdown.classList.remove('show');
         }
     });
 });
