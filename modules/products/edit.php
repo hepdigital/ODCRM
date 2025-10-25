@@ -157,6 +157,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
            ':id' => $id
        ]);
 
+       // Düşük stok bildirimi (stok değiştiyse ve düşükse)
+       $lowStockThreshold = 10;
+       if ($stock_quantity < $lowStockThreshold && $stock_quantity != $product['stock_quantity']) {
+           $notificationManager->createLowStockNotification(
+               $name,
+               $stock_quantity,
+               $lowStockThreshold
+           );
+       }
+
        $message = 'Ürün başarıyla güncellendi.';
        $messageType = 'success';
 

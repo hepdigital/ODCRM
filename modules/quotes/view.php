@@ -45,11 +45,24 @@ $items = $stmt->fetchAll();
 // Durum güncellemesi yapıldı mı?
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     try {
+        $oldStatus = $quote['status'];
+        $newStatus = $_POST['status'];
+
         $stmt = $db->prepare("UPDATE quotes SET status = ? WHERE id = ?");
-        $stmt->execute([$_POST['status'], $id]);
-        
-        $quote['status'] = $_POST['status'];
-        
+        $stmt->execute([$newStatus, $id]);
+
+        // Bildirim oluştur (durum değiştiyse)
+        if ($oldStatus !== $newStatus) {
+            $notificationManager->createQuoteStatusNotification(
+                $quote['quote_number'],
+                $quote['company_name'],
+                $oldStatus,
+                $newStatus
+            );
+        }
+
+        $quote['status'] = $newStatus;
+
         $message = 'Teklif durumu güncellendi.';
         $messageType = 'success';
     } catch (Exception $e) {

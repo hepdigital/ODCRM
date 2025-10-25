@@ -80,6 +80,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':role' => $role
             ]);
 
+            // Yeni kullanıcı bildirimi (sadece adminlere)
+            $adminStmt = $db->query("SELECT id FROM users WHERE role = 'admin'");
+            $admins = $adminStmt->fetchAll();
+
+            foreach ($admins as $admin) {
+                $notificationManager->create(
+                    $admin['id'],
+                    'info',
+                    'Yeni Kullanıcı Eklendi',
+                    "Yeni kullanıcı kaydedildi: {$username}" . ($full_name ? " ({$full_name})" : '') . " - Rol: " . ($role === 'admin' ? 'Yönetici' : 'Kullanıcı'),
+                    '/modules/users/list.php'
+                );
+            }
+
             // Tamponu temizle ve yönlendir
             ob_end_clean();
             header("Location: list.php?success=1");

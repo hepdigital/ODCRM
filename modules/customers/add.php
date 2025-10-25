@@ -38,6 +38,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':address' => $address
         ]);
 
+        // Yeni müşteri bildirimi
+        $notificationManager->createSystemNotification(
+            'success',
+            'Yeni Müşteri Eklendi',
+            "Yeni müşteri kaydedildi: {$company_name}" . ($contact_person ? " ({$contact_person})" : ''),
+            '/modules/customers/list.php'
+        );
+
         $message = 'Müşteri başarıyla eklendi.';
         $messageType = 'success';
 

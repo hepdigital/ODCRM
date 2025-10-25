@@ -172,6 +172,18 @@ foreach ($_POST['products'] as $key => $item) {
 
         $db->commit();
 
+        // Müşteri bilgisini al
+        $customerStmt = $db->prepare("SELECT company_name FROM customers WHERE id = ?");
+        $customerStmt->execute([$customerId]);
+        $customer = $customerStmt->fetch();
+
+        // Bildirim oluştur
+        $notificationManager->createNewQuoteNotification(
+            $quoteNumber,
+            $customer['company_name'],
+            $totalAmount
+        );
+
         if (isset($_POST['generate_pdf'])) {
             header("Location: generate_pdf.php?id=" . $quoteId);
             exit;

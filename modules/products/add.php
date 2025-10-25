@@ -124,6 +124,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':image_url' => $image_url
         ]);
 
+        // Düşük stok bildirimi
+        $lowStockThreshold = 10;
+        if ($stock_quantity < $lowStockThreshold) {
+            $notificationManager->createLowStockNotification(
+                $name,
+                $stock_quantity,
+                $lowStockThreshold
+            );
+        }
+
         $message = 'Ürün başarıyla eklendi.';
         $messageType = 'success';
     } catch (Exception $e) {
